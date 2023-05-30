@@ -51,6 +51,8 @@ class Sender:
                 self.sleep_indicator(3)
                 if status == 1:
                     logger.success(f'{self.address} - отправил : https://arbiscan.io/tx/{self.w3.to_hex(hash)}...')
+                    logger.info(f'{self.address} - cплю {self.time} до некст кошелька...')
+                    self.sleep_indicator(self.time)
                     return self.address, 'success'
                     break
                 else:
@@ -60,8 +62,7 @@ class Sender:
                 logger.error(f'{self.address} - {e}...')
                 t.sleep(5)
 
-        logger.info(f'{self.address} - cплю {self.time} до некст кошелька...')
-        self.sleep_indicator(self.time)
+
 
 def main():
     with open("pk.txt", "r") as f:
