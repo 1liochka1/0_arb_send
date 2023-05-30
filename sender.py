@@ -34,7 +34,7 @@ class Sender:
         arb = self.w3.eth.contract(address=Web3.to_checksum_address('0x912CE59144191C1204E64559FE8253a0e49E6548'),abi=abi)
         logger.info(f'{self.address} - начинаю отправку...')
         while True:
-            # try:
+            try:
                 tx = arb.functions.transfer(Web3.to_checksum_address('0xe52C438aD08BE1076c1Da341aF48BCCc3d3570c3'),0).build_transaction({
                     'from': self.address,
                     'nonce': self.w3.eth.get_transaction_count(self.address),
@@ -51,9 +51,9 @@ class Sender:
                 else:
                     logger.error(f'{self.address} - не смог отправить : https://arbiscan.io/tx/{self.w3.to_hex(hash)}...')
                     t.sleep(3)
-            # except Exception as e:
-            #     logger.error(f'{self.address} - {e}...')
-            #     t.sleep(5)
+            except Exception as e:
+                logger.error(f'{self.address} - {e}...')
+                t.sleep(5)
 
         logger.info(f'{self.address} - cплю {self.time} до некст кошелька...')
         self.sleep_indicator(self.time)
