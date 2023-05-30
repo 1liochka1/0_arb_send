@@ -54,7 +54,6 @@ class Sender:
                     logger.info(f'{self.address} - cплю {self.time} до некст кошелька...')
                     self.sleep_indicator(self.time)
                     return self.address, 'success'
-                    break
                 else:
                     logger.error(f'{self.address} - не смог отправить : https://arbiscan.io/tx/{self.w3.to_hex(hash)}...')
                     t.sleep(3)
